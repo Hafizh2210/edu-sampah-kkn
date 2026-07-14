@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bijak Kelola Sampah - EduSampah</title>
+</title>  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navigation.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .artikel-body {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .artikel-body h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .artikel-body h1 i { color: var(--green); }
+    .artikel-subhead {
+      font-size: 1rem;
+      color: var(--gray);
+      border-left: 4px solid var(--green-light);
+      padding-left: 1rem;
+      margin-top: 0.2rem;
+      margin-bottom: 1.8rem;
+      font-weight: 400;
+    }
+    .artikel-author { font-weight: 500; color: var(--green-dark); }
+    .artikel-pill {
+      background: rgba(46,125,50,0.12);
+      border-radius: 40px;
+      padding: 0.2rem 1rem;
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: var(--green-dark);
+    }
+    .artikel-lead {
+      background: var(--bg-light);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.8rem;
+      margin: 1.8rem 0 2.2rem;
+      font-size: 1.05rem;
+      border-left: 6px solid var(--green);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .artikel-lead i { color: var(--green); margin-right: 0.4rem; }
+    .artikel-lead strong { color: var(--green-dark); }
+    .artikel-lead span {
+      display: inline-block;
+      margin-top: 0.6rem;
+      background: rgba(46,125,50,0.1);
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+    .section-card {
+      background: linear-gradient(145deg, #f5faf2, #e2efe0);
+      border-radius: 2rem;
+      padding: 1.8rem 1.5rem;
+      margin: 1.5rem 0 2rem;
+      border: 2px solid #b8d4b6;
+    }
+    .section-card .section-card-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--green-dark);
+      margin-bottom: 0.2rem;
+    }
+    .section-card .section-card-title i { color: var(--green); }
+    .section-card .section-card-sub {
+      color: var(--gray-dark);
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+    .artikel-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .artikel-card-item {
+      background: var(--white);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1rem;
+      border: 2px solid #dbead8;
+      transition: 0.2s;
+      text-align: center;
+    }
+    .artikel-card-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .artikel-card-icon { font-size: 2.8rem; display: block; margin-bottom: 0.3rem; }
+    .artikel-card-label { font-weight: 700; font-size: 1.1rem; color: var(--text-dark); }
+    .artikel-card-warna {
+      display: inline-block;
+      padding: 0.1rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin: 0.2rem 0;
+    }
+    .artikel-card-contoh { font-size: 0.85rem; color: var(--gray-dark); margin-top: 0.3rem; }
+    .artikel-card-contoh span {
+      background: rgba(46,125,50,0.08);
+      padding: 0.1rem 0.6rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin: 0.1rem;
+      font-size: 0.75rem;
+    }
+    .artikel-card-aksi {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      display: inline-block;
+    }
+    .card-organik { border-color: var(--green); }
+    .card-organik .artikel-card-warna { background: var(--green); color: var(--white); }
+    .card-organik .artikel-card-aksi { background: rgba(46,125,50,0.12); color: var(--green-dark); }
+    .card-anorganik { border-color: #f9a825; }
+    .card-anorganik .artikel-card-warna { background: #f9a825; color: var(--white); }
+    .card-anorganik .artikel-card-aksi { background: rgba(249,168,37,0.12); color: #8a6d00; }
+    .card-residu { border-color: var(--red-light); }
+    .card-residu .artikel-card-warna { background: var(--red-light); color: var(--white); }
+    .card-residu .artikel-card-aksi { background: rgba(229,115,115,0.12); color: #8a2a2a; }
+    .wadah-box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+      padding: 1rem;
+      background: var(--white);
+      border-radius: 1.5rem;
+      border: 2px dashed #b8d4b6;
+    }
+    .wadah-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--bg-light);
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      border: 2px solid #dbead8;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .wadah-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+    .dot-hijau { background: var(--green); }
+    .dot-kuning { background: #f9a825; }
+    .dot-merah { background: var(--red-light); }
+    .r-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .r-card-item {
+      background: var(--white);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      border: 2px solid #dbead8;
+      transition: 0.2s;
+    }
+    .r-card-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .r-card-icon {
+      font-size: 2.6rem;
+      color: var(--green);
+      background: rgba(46,125,50,0.1);
+      padding: 0.6rem;
+      border-radius: 60px;
+      display: inline-block;
+      width: 4.4rem;
+      margin-bottom: 0.3rem;
+    }
+    .r-card-item h4 { font-weight: 800; color: var(--text-dark); font-size: 1.2rem; }
+    .r-card-desc { font-size: 0.85rem; color: var(--gray-dark); margin-top: 0.2rem; }
+    .r-card-contoh {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      background: var(--bg-light);
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      display: inline-block;
+      color: var(--green-dark);
+    }
+    .r-card-1 { border-color: var(--green); }
+    .r-card-2 { border-color: #f9a825; }
+    .r-card-3 { border-color: var(--blue-light); }
+    .artikel-tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .artikel-tips-card {
+      background: var(--white);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1rem;
+      border: 2px solid #dbead8;
+      transition: 0.2s;
+      text-align: center;
+    }
+    .artikel-tips-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .artikel-tips-icon {
+      font-size: 2.4rem;
+      color: var(--green);
+      background: rgba(46,125,50,0.1);
+      padding: 0.6rem;
+      border-radius: 60px;
+      display: inline-block;
+      width: 4.2rem;
+      margin-bottom: 0.3rem;
+    }
+    .artikel-tips-card h4 { font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+    .artikel-tips-desc { font-size: 0.85rem; color: var(--gray-dark); margin-top: 0.2rem; }
+    .artikel-tips-waktu {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      background: rgba(46,125,50,0.08);
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      display: inline-block;
+      color: var(--green-dark);
+    }
+    .artikel-cta {
+      margin: 2.2rem 0 0.8rem;
+      padding: 1.5rem 1.8rem;
+      background: var(--bg-light);
+      border-radius: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .artikel-cta strong { font-size: 1.1rem; color: var(--green-dark); }
+    .artikel-btn {
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.15s;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 4px 10px rgba(46,125,50,0.2);
+    }
+    .artikel-btn:hover { background: var(--green-dark); transform: scale(1.02); }
+    .quote-box {
+      margin-top: 0.8rem;
+      background: rgba(46,125,50,0.06);
+      border-radius: 60px;
+      padding: 0.3rem 1.4rem;
+      display: inline-block;
+      font-weight: 400;
+      color: var(--green-dark);
+      border: 1px solid #bdd9b6;
+    }
+    .artikel-footnote {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+      border-top: 1px solid #d8e6d4;
+      padding-top: 1.2rem;
+    }
+    .inline-step { margin-top: 0.4rem; font-size: 0.75rem; color: var(--green-dark); }
+    .inline-step span { opacity: 0.8; }
+    @media (max-width: 650px) {
+      .artikel-body h1 { font-size: 1.5rem; }
+      .section-card { padding: 1.2rem 1rem; }
+      .artikel-lead { padding: 1rem 1.2rem; font-size: 0.95rem; }
+      .artikel-grid-3, .r-grid, .artikel-tips-grid { grid-template-columns: 1fr; }
+      .artikel-cta { flex-direction: column; gap: 1rem; text-align: center; }
+      .wadah-box { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="nav-logo">
+        <span class="nav-logo-icon">♻️</span>
+        EduSampah
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="../index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">
+            Kategori Sampah <span class="chevron">▼</span>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="organik.html" class="nav-dropdown-link">
+              <span class="nav-dropdown-icon green">🥬</span>
+              Organik
+            </a>
+            <a href="anorganik.html" class="nav-dropdown-link">
+              <span class="nav-dropdown-icon blue">🧴</span>
+              Anorganik
+            </a>
+            <a href="b3.html" class="nav-dropdown-link">
+              <span class="nav-dropdown-icon red">☣️</span>
+              B3
+            </a>
+            <a href="residu.html" class="nav-dropdown-link">
+              <span class="nav-dropdown-icon gray">🩹</span>
+              Residu
+            </a>
+          </div>
+        </div>
+        <a href="panduan.html" class="nav-link">Panduan & Tips</a>
+        <a href="artikel.html" class="nav-link">Artikel</a>
+        <a href="../index.html#belajar" class="nav-cta">Mulai Belajar</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <a href="artikel.html" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--green);margin-bottom:12px;">← Kembali ke Artikel</a>
+      <span class="section-label">Artikel</span>
+      <h1 class="section-title">Bijak Kelola Sampah</h1>
+      <p class="section-subtitle">Langkah kecil untuk perubahan besar dalam mengelola sampah dari rumah.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container artikel-body">
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+        <div>
+          <h1><i>🌱</i></i> Bijak Kelola Sampah</h1>
+          <div class="artikel-subhead">Langkah Kecil untuk Perubahan Besar · <span class="artikel-author">👤 Muhammad Hafizh Hibatullah</span></div>
+        </div>
+        <span class="artikel-pill">🕐 #MulaiDariRumah</span>
+      </div>
+
+      <div class="artikel-lead">
+        <i>♻️</i</i>> Pernahkah Anda membayangkan ke mana perginya sampah yang kita buang setiap pagi? Seringkali, setelah masuk ke truk sampah, kita merasa masalah sudah selesai. Padahal, masalah sebenarnya baru saja dimulai di Tempat Pembuangan Akhir (TPA).<br><br>
+        <strong>Sampah bukan sekadar barang sisa.</strong> Jika tidak dikelola dengan benar, sampah menjadi beban bagi lingkungan, sumber penyakit, dan ancaman masa depan. Namun kabar baiknya: kekuatan untuk mengubah situasi ini ada di tangan kita.
+        <span>Mari pelajari cara mengelola sampah dari</span> rumah dengan metode sederhana & efektif</span>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-title"><i>🏷</i>️</i> 1. Kenali Jenis Sampahmu</div>
+        <div class="section-card-sub">Pemilahan sejak sumber membuat daur ulang lebih efisien. Siapkan wadah berbeda di rumah.</div>
+
+        <div class="artikel-grid-3">
+          <div class="artikel-card-item card-organik">
+            <span class="artikel-card-icon">🍎</span>
+            <div class="artikel-card-label">Sampah Organik</div>
+            <span class="artikel-card-warna">Hijau</span>
+            <div class="artikel-card-contoh">
+              <span>s</span>isa makanan</span>
+              <span>kulit buah</span></span>
+              <span>daun kering</span></span>
+              <span>sayuran</span>
+            </div>
+            <span class="artikel-card-</span>aksi">→ Kompos / Eco-Enzyme</span>
+          </div>
+
+          <div class="artikel-card-item card-anorganik">
+            <span class="artikel-card-icon">🧴</span>
+            <div class="artikel-card-label">Sampah Anorganik</div>
+            <span class="artikel-card-warna">Kuning / Biru</span>
+            <div class="artikel-card-contoh">
+              <span>botol plastik</span>
+              <span>kaleng</span></span>
+              <span</span>>kertas</span>
+              <span>kard</span>us</span>
+            </div>
+            <span class="artikel-card-aksi">↺ Daur Ulang / Bank Sampah</span>
+          </div>
+
+          <div class="artikel-card-item card-residu">
+            <span class="artikel-card-icon">🗑️</span>
+            <div class="artikel-card-label">Sampah Residu</div>
+            <span class="artikel-card-warna">Merah</span>
+            <div class="artikel-card-contoh">
+              <span>popok bayi</span></span>
+              <span>pembalut</span>
+              <span</span>>puntung rokok</span>
+              <span>masker</span>
+            </div>
+           </span> <span class="artikel-card-aksi">⚠️ Kelola Khusus</span>
+          </div>
+        </div>
+
+        <div class="wadah-box">
+          <div class="wadah-item">
+            <span class="wadah-dot dot-hijau"></span>
+            🍃 ORGANIK
+          </div>
+          <div class="wadah-item">
+            <span class="wadah-dot dot-kuning"></span>
+            🧴 ANORGANIK
+          </div>
+          <div class="wadah-item">
+            <span class="wadah-dot dot-merah"></span>
+            🗑️ RESIDU
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-title"><i></i>♻️</i> 2. Terapkan Prinsip 3R</div>
+        <div class="section-card-sub">Jangan hanya fokus membuang, tapi fokuslah pada mengurangi sampah dari sumbernya.</div>
+
+        <div class="r-grid">
+          <div class="r-card-item r-card-1">
+            <div class="r-card-icon">🛍️</div>
+            <h4>REDUCE</h4>
+            <div class="r-card-desc">Kurangi</h4> pemakaian barang sekali pakai</div>
+            <div class="r-card-contoh">✅ Bawa tas sendiri</div>
+            <div class="r-card-contoh">✅ Bawa tumbler</div>
+            <div class="r-card-contoh">✅ Tolak sedotan plastik</div>
+          </div>
+          <div class="r-card-item r-card-2">
+            <div class="r-card-icon">🔄</div>
+            <h4>REUSE</h</h4>4>
+            <div class="r-card-desc">Gunakan kembali barang bekas dengan fungsi baru</div>
+            <div class="r-card-contoh">✅ Botol → pot tanaman</div>
+            <div class="r-card-contoh">✅ Kardus → wadah simpan</div>
+            <div class="r-card-contoh">✅ Kain → tas belanja</div>
+          </div>
+          <div class="r-card-item r-card-3">
+            <div class="r-card-icon">🚚</div>
+            <h4>RECYCLE</h4>
+            <div class="</h4>r-card-desc">Daur ulang sampah anorganik menjadi produk baru</div>
+            <div class="r-card-contoh">✅ Pisahkan & bersihkan</div>
+            <div class="r-card-contoh">✅ Setor ke bank sampah</div>
+            <div class="r-card-contoh">✅ Diolah jadi barang baru</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-card-title"><i></i>🍃</i> 3. Tips Mengolah Sampah Organik</div>
+        <div class="section-card-sub">Sampah organik menyumbang porsi terbesar. Jangan biarkan terbuang sia-sia!</div>
+
+        <div class="artikel-tips-grid">
+          <div class="artikel-tips-card">
+            <div class="artikel-tips-icon">🌱</div>
+            <h4>Pengompos</h4>an Sederhana</h4>
+            <div class="artikel-tips-desc">Gali lubang atau gunakan komposter. Sisa dapur jadi pupuk subur.</div>
+            <div class="artikel-tips-waktu">🕐 1-2 bulan</div>
+            <div class="inline-step">
+              <span>🌱 sisa dapur</span></span> → <span>🔄 proses</span</span>> → <span>🌿 pupuk kompos</span></span>
+            </div>
+          </div>
+          <div class="artikel-tips-card">
+            <div class="artikel-tips-icon">🧪</div>
+            <h4>Eco-Enzyme</h4>
+           </h4> <div class="artikel-tips-desc">Fermentasi kulit buah menjadi pembersih lantai & pupuk cair.</div>
+            <div class="artikel-tips-waktu">💧 3 bulan fermentasi</div>
+            <div class="inline-step">
+              <span>🍊 kulit</span> buah</span> + <span>🍬 gula</span></span> + <span>💧 air</span>
+            </div>
+         </span> </div>
+          <div class="artikel-tips-card">
+            <div class="artikel-tips-icon">💧</div>
+            <h4>Lubang Biopori</h4></h4>
+            <div class="artikel-tips-desc">Atasi genangan & percepat pengomposan di dalam tanah.</div>
+            <div class="artikel-tips-waktu">🌍 Resapan air</div>
+            <div class="inline-step">
+              <span>⬇️ lubang</span> pipa</span> → <span>💧 serap air</span> → <span>🌱 kompos dalam tanah</span>
+            </div>
+         </span></span> </div>
+        </div>
+      </div>
+
+      <div class="artikel-cta">
+        <div>
+          <i>💬</i>
+</i>          <strong>Mulai</strong> dari langkah terkecil hari ini.</strong>
+          <span style="display:inline-block;background:rgba(46,125,50,0.1);border-radius:40px;padding:0.1rem 1rem;font-size:0.9rem;margin-left:0.5rem;">
+            😊 Pilih satu sudut untuk memilah
+          </span>
+        </div>
+        <button class="artikel-btn" id="actionBtn">✨ Aksi Kecil Sekarang</button>
+      </div>
+
+      <div class="quote-box" id="messageBox">
+        💡 <span id="motivasi">Setiap plastik yang dihindari berarti mengurangi volume sampah.</span>
+      </div>
+
+      <div class="artikel-footnote">
+        🌳 Lingkungan yang bersih adalah warisan terbaik untuk generasi mendatang.
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="../index.html" class="nav-logo" style="color:var(--white);">
+            <span class="nav-logo-icon">♻️</span>
+            EduSampah
+          </a>
+          <p class="footer-brand-desc">Platform edukasi sampah terpercaya untuk Indonesia yang lebih hijau.</p>
+          <div class="footer-social">
+            <a href="#" class="footer-social-link" aria-label="Instagram">📷</a>
+            <a href="#" class="footer-social-link" aria-label="YouTube">▶️</a>
+            <a href="#" class="footer-social-link" aria-label="TikTok">🎵</a>
+            <a href="#" class="footer-social-link" aria-label="WhatsApp">💬</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Kategori</h4>
+          <div class="footer-links">
+            <a href="organik.html" class="footer-link">Sampah Organik</a>
+            <a href="anorganik.html" class="footer-link">Sampah Anorganik</a>
+            <a href="b3.html" class="footer-link">Sampah B3</a>
+            <a href="residu.html" class="footer-link">Sampah Residu</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="panduan.html" class="footer-link">Panduan & Tips</a>
+            <a href="artikel.html" class="footer-link">Artikel</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Sumber Data</h4>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Kementerian LHK</a>
+            <a href="#" class="footer-link">KLHK RI</a>
+            <a href="#" class="footer-link">Kebijakan Privasi</a>
+            <a href="#" class="footer-link">Syarat & Ketentuan</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Edu</span>Sampah. All Rights Reserved.</span>
+        <span>Dibuat dengan ♻️ untuk bumi</span> yang lebih hijau</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const quotes = [
+        "Setiap plastik yang dihindari berarti mengurangi volume sampah yang mencemari lautan.",
+        "Mengelola sampah bukan tentang sempurna, tetapi menjadi lebih baik setiap hari.",
+        "Sampah organik yang dikelola sendiri = pupuk subur & bumi lebih sehat.",
+        "Reduce, Reuse, Recycle — mulai dari kebiasaan kecil di rumah.",
+        "Bank sampah mengubah sampah anorganik menjadi barang baru yang bermanfaat.",
+        "Lubang biopori: sederhana, atasi genangan, dan kompos alami.",
+        "Eco-enzyme: fermentasi kulit buah jadi pembersih ramah lingkungan.",
+        "Kompos dari sisa dapur: nutrisi terbaik untuk tanaman Anda."
+      ];
+      let index = 0;
+      const motivasiEl = document.getElementById('motivasi');
+
+      document.getElementById('actionBtn').addEventListener('click', function() {
+        index = (index + 1) % quotes.length;
+        motivasiEl.textContent = quotes[index];
+        this.innerHTML = '✅ Langkah kecil ✦';
+        setTimeout(() => {
+          this.innerHTML = '✨ Aksi Kecil Sekarang';
+        }, 1200);
+      });
+
+      motivasiEl.textContent = quotes[0];
+
+      document.querySelectorAll('.artikel-card-item, .r-card-item, .artikel-tips-card').forEach(card => {
+        card.addEventListener('click', function() {
+          this.style.transition = '0.1s';
+          this.style.backgroundColor = '#f0f9ec';
+          setTimeout(() => { this.style.backgroundColor = ''; }, 300);
+        });
+      });
+    })();
+  </script>
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>
